@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+	<h1>Edit User Info</h1>
+	<form action="/edit" method="post">
+		<input type="text" minlength="8" placeholder="8자 이상" name="userName" readOnly th:value="${userInfo.userName}" value="userName">
+			<input type="password" minlength="8" placeholder="8자 이상" required name="passWord">
+			<input type="password" minlength="8" placeholder="8자 이상" required  name="checkPassword">
+			<input type="email" required name="email">
+			<button>수정하기</button>
+	</form>
+
+</body>
+</html>
+
+

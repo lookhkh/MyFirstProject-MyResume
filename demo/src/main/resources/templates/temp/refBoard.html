@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ref</title>
+</head>
+<body>
+	<h1>레퍼런스 체크</h1>
+
+<div th:if="${session.userInfo==null}" >
+	<form action="/login" method="post">
+		<input type="text"  name="userName">
+		<input type="password" name="password"/>
+		<input type="submit"> 
+	</form>
+	<a href="/signup">회원가입</a>
+</div>
+
+<div th:if="${session.userInfo!=null}">
+	<a href="/logout">로그아웃</a>
+	<a href="/edit">정보관리</a>
+	<a href="/ref/register">글쓰기</a>
+
+</div>
+
+<table>
+ <tr>
+   <th>게시물번호</th>
+  <th>userName</th>
+  <th>RegisterDate</th>
+  <th>Relationship</th>
+  <th>title</th>
+  
+ </tr> 
+   
+  <tr th:each="list : ${list}"> 
+  	<td><a th:href="@{/ref/detail(bno=${list.bno})}" href='#'>click</a></td>
+    <td th:text="${list.bno}"></td>
+  	<td th:text="${list.userName}"></td>
+	<td th:text="${list.relationship}"></td>
+ 	<td th:text="${list.title}"></td> 
+
+  </tr>
+</table>
+
+	<a th:if="${pager.prev}" th:href="@{/ref(pageNum=${pager.startPage-1})}" href="">prev</a>
+		
+	<ul>
+	<th:block th:each="i: ${#numbers.sequence(pager.startPage, pager.endPage)}">
+		<li><a th:href="@{/ref(pageNum=${i})}" th:text="${i}"></a></li>
+	</th:block>
+     
+	</ul>	
+		
+	<a th:if="${pager.next}" th:href="@{/ref(pageNum=${pager.endPage+1})}" href="">next</a>
+
+
+    <script>
+
+
+    </script>
+</body>
+</html>

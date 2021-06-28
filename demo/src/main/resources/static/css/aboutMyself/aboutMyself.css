@@ -1,0 +1,127 @@
+    *{
+        padding: 0;
+        margin: 0;
+    font-family: 'Nanum Pen Script', cursive;
+
+    }
+
+    body{
+        position: relative;
+        width: 100vw;
+        height: 100vh;
+    }
+
+    .intro{
+        width: 100vw;
+        height: 90vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .intro.hidden{
+        display: none;
+    }
+
+    .intro h1{
+        color: black;
+        position: absolute;
+        top: 50%;
+    }
+    
+    .wrapper.hidden{
+        display: none;
+    }
+
+    .wrapper{
+        position: relative;
+        top: 5%;
+        text-align: center;
+        margin: 0 auto;
+        width: 80%;
+        height: 80%;   
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        perspective: 1000px;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+   
+
+
+
+    .box{
+        margin: 20px;
+        box-sizing: border-box;
+        width: 18%;
+        height: 18%;
+        background-color: white;
+        transition: 2s;
+        border-radius: 20px;
+        backface-visibility: hidden;
+        transform: translateZ(-8000px);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.5em;
+        transform-style: preserve-3d;
+    }
+
+    .box.active{
+        transform:  translateZ(0px) ;
+        position: relative;
+        transition: 2s;
+        border-radius: 10px;
+    }
+
+    .box .front{
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1;
+        border-radius: 10px;
+        border: 1px solid;
+    }
+
+    .box .back{
+        transform: rotateY(180deg);
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+ 
+
+    .box:hover .front{
+        transform: rotateY(180deg);
+        border: none;
+    }
+
+    .box:hover .back{
+        transform: rotateY(360deg);
+    }
+
+    img{
+        width: 100%;
+        height: 100%;
+        border-radius: 10px;
+        pointer-events: none;
+    }
+    
+      .box:hover img{
+        transform: scale(1.2);
+    }
+ 

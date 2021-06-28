@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button>click</button>
+</body>
+</html>
+<script>
+
+const $click = document.querySelector('button')
+$click.addEventListener('click',function(){
+    const xhr = new XMLHttpRequest();
+    const url = "http://localhost:8085/mail/test";
+    
+    xhr.open('get',url)
+    xhr.send();
+
+    xhr.onreadystatechange=()=>{
+        if(xhr.status===200){
+            let div = document.createElement('div');
+            let body= document.body;
+            console.log(body);
+
+            let result = JSON.parse(xhr.response);
+
+            div.innerHTML = result.name+result.response.age
+            body.appendChild(div);
+	
+        }
+    }
+})
+
+</script>

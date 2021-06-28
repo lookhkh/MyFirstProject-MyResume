@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <style>
+
+body{
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position:relative;
+        }
+        .wrapper{
+        	
+        	position : absolute;
+        	top : 3%;
+		    width: 60vw;
+            height: 60vh;
+            box-sizing: border-box;
+            margin: 0 auto;
+        }
+
+        h2{
+            text-align: center;
+        }
+
+      
+        .target{
+            margin-top: 2%;
+        }
+  
+  
+
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="mb-3">
+            <h2>글쓰기</h2>
+        </div>
+    <form action="/ref/register" method="POST">
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">이름</label>
+            <input type="text" class="form-control" id="exampleFormControlInput1" readonly name="userName" th:value="${userName}" value="탄지로">
+        </div>
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">제목</label>
+            <input type="text" class="form-control" id="exampleFormControlInput1"  name="title" placeholder="제목을 입력해주세요">
+        
+        </div>
+        <div>
+            <label for="exampleFormControlInput1" class="form-label">관계</label>
+              <select name="relationship" class="form-select form-select-sm" aria-label=".form-select-sm example">
+                <option selected>관계를 선택해주세요</option>
+                <option value="친구">친구</option>
+                <option value="가족">가족</option>
+                <option value="멘토">멘토</option>
+              </select>
+        </div>      
+        <div class="mb-3 target">
+            <label for="exampleFormControlInput1" class="form-label">등록일</label>
+            <input type="text" class="form-control" name="registerDate" id="exampleFormControlInput1" readonly th:value="${date}" value="">
+        </div>
+        <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label">내용</label>
+            <textarea class="form-control" name="content" id="exampleFormControlTextarea1" rows="15"></textarea>
+        </div>
+        <button>등록하기</button>
+    </form>
+    </div>
+</body>
+</html>

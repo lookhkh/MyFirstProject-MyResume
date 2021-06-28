@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.MemberMapper">
+
+
+<insert id="save">
+	insert into member_management_tbl values (#{userName},#{passWord}, #{Email}, #{auth})
+</insert>
+
+<select id="checkTheId" resultType="com.example.demo.member.domain.SavedMemberDTO">
+	select * from member_management_tbl where username=#{userName}
+</select>
+
+<select id="getUserInfo" resultType="com.example.demo.member.domain.SavedMemberDTO">
+	select * from member_management_tbl where username=#{userName}
+</select>
+
+<update id="editUserInfo">
+
+update member_management_tbl set password = #{passWord}
+, email = #{email} where username=#{userName} 
+</update>
+
+ </mapper>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>조현일</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            font-family: 'Nanum Pen Script', cursive;
+        }
+
+        a{
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .wrapper{
+            width: 100vw;
+            height: 100vh;
+            background-image: url("/srcimg/index/index.png");
+            background-repeat: no-repeat;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .greeting{
+   
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center ;
+            align-items: center;
+        }
+
+        .greeting h1{
+            display: inline-block;
+            opacity: 1;
+            transition: 2s;
+        }
+
+        .greeting h1.h1{
+            opacity: 0;
+        }
+
+
+        .greeting p{
+            width: 70%;
+            margin-top: 4%;
+            font-size: 1.5rem;
+            transition: 2s;
+            opacity: 1;
+        }
+
+        .greeting p.none{
+            width: 70%;
+            margin-top: 4%;
+            font-size: 1.5rem;
+            opacity: 0;
+        }
+
+
+        .action{
+            margin-top: 7%;
+            width: 100%;
+            height: auto;
+            display: flex;
+            justify-content: space-evenly;
+            font-size: 1.5rem;
+            transition: 1s;
+            opacity: 1;
+        }
+
+        .action.none{
+            margin-top: 7%;
+            width: 100%;
+            height: auto;
+            display: flex;
+            justify-content: space-evenly;
+            font-size: 1.5rem;
+            opacity: 0;
+        }
+
+        .action a{
+            box-sizing: content-box;
+            font-size: 2rem;
+            font-weight: 600;
+            color:black;
+            transition: 1s;
+        }
+
+        .action a:hover{
+            transform: scale(1.5);
+        }
+
+
+
+
+  
+    </style>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap" rel="stylesheet">
+    <script src="../js/index/index.js"></script>
+</head>
+<body>
+    <div class="wrapper">
+         <div class="greeting">
+            <h1 class="h1">Hello World!</h1>
+            <p class="none">Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia molestiae reiciendis fugit esse iure nam, quod, aut ipsam dolores minus tempora ipsum architecto nulla blanditiis adipisci harum cum hic cumque. Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis, perferendis vero voluptates nihil repellat recusandae sunt praesentium quod adipisci odit ut, veniam voluptate at quae blanditiis officia inventore dolore aliquam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Non fuga odit totam quo dolore iure obcaecati eius est, laborum quos assumenda et facere rerum quidem repudiandae eligendi eveniet, nobis quisquam? loorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae officiis voluptatibus facere, magnam cumque veritatis vero, repellendus architecto rem nihil impedit esse. Alias corrupti error eligendi veniam, obcaecati maxime doloremque?</p>
+        </div>
+          <div class="action none">
+              <a href="/about">about me</a>
+              <a href="/ref">ref</a>
+              <a href="#">contact me</a>
+        </div>
+     </div>
+</body>
+</html>

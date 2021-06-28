@@ -1,0 +1,95 @@
+	*{
+  
+    font-family: 'Nanum Pen Script', cursive;
+}
+	
+	body{
+			width: 100vw;
+			height: 100vh;
+			margin: 0 auto;
+		}
+
+		a{
+			text-decoration: none;
+			list-style: none;
+			color: black;
+		}
+
+		h1{
+			font-weight: 600;
+			text-align: center;
+		}
+
+		.wrapper{
+			margin: 0 auto;
+
+			width: 80%;
+			height: 80%;
+			display: flex;
+			flex-direction: column;
+			padding: 10%;
+		}
+
+		.table{
+			text-align: center;
+		}
+
+		.page{
+			display: flex;
+			flex-direction: row;
+			justify-content: center;
+			align-items: center;
+			display: none;
+		}
+
+		section .temp{
+			display: flex;
+			flex-direction: row;
+			justify-content: center;
+			align-items: center;
+		}
+
+		.page-temp{
+			display: flex;
+			justify-content: space-between;
+		}
+		
+	.action{
+    width: 70%;
+    height: auto;
+    display: flex;
+    justify-content: space-evenly;
+    font-size: 1.5rem;
+    transition: 1s;
+    opacity: 1;
+    position: sticky;
+    left: 15%;
+    top: 10%;
+}
+
+.action a{
+    box-sizing: content-box;
+    font-size: 2rem;
+    font-weight: 600;
+    color:black;
+    transition: 1s;
+}
+
+.action a:hover{
+	transform : scale(1.2)
+}
+
+        #loginInfo{
+            width: 300px;
+            position: fixed;
+            left: 80%;
+            top: 0;
+            font-size: 1.6rem;
+
+        }
+
+        #loginInfo :first-child{
+            margin-right: 7%;
+        }
+
+
