@@ -35,7 +35,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter  {
 	protected void configure(HttpSecurity http) throws Exception {
 
 	http.authorizeRequests().antMatchers("/ref/detail").permitAll().antMatchers("/ref").permitAll()
-	.antMatchers("/ref/**").hasAnyRole("MEMBER");
+	.antMatchers("/ref/**").hasAnyRole("MEMBER").antMatchers("/about/register").hasAnyRole("MEMBER");
 	http.formLogin().successHandler(LoginSuccesHandler());
 	http.csrf().disable();
 	http.logout().permitAll().invalidateHttpSession(true).clearAuthentication(true).logoutSuccessHandler(LogoutHander()).deleteCookies("JSESSIONID");

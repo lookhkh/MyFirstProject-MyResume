@@ -51,8 +51,8 @@
                     const result = JSON.parse(xhr.response);
                     head.innerHTML=result.title;
                     content.innerHTML=result.content;
-                    img.src=result.imgpath;
-
+                    img.src="/about/images/"+result.imgpath;
+					
                     let click = new Event('click');
                     modalBtn.dispatchEvent(click);
 
@@ -107,7 +107,7 @@
             divBack.appendChild(imgTag);
 
             divFront.innerHTML=json.title;
-			imgTag.src=json.imgpath;
+			imgTag.src="/about/images/"+json.imgpath;
 
             return divBox;
         }

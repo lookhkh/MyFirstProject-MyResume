@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+ <meta charset="utf-8">
+</head>
+<body>
+<div class="container">
+ <div class="py-5 text-center">
+ <h2>등록하기</h2>
+ </div>
+ <h4 class="mb-3">등록하기</h4>
+ <form th:action method="post" enctype="multipart/form-data">
+ <ul>
+
+ <li>제목 <input type="text" name="title"></li>
+ <li>콘텐츠 <input type="text" name="content"></li>
+ <li>파일<input type="file" name="file" ></li>
+ </ul>
+ <input type="submit"/>
+ </form>
+</div> <!-- /container -->
+</body>
+</html>
