@@ -37,6 +37,7 @@ public class MemberManageController {
 	public String index(HttpSession session) {
 		
 		SecurityContext context= SecurityContextHolder.getContext();
+
 		System.out.println(context.getAuthentication().getName());
 		return "/index";
 	}
