@@ -19,7 +19,7 @@
       <div id="loginInfo">
        <th:block th:if="${session.loginInfo==null}">
         <a href="/signup">회원가입</a>
-        <a href="/login">로그인</a>
+        <a href="/loginReq">로그인</a>
       </th:block>
          <th:block th:if="${session.loginInfo!=null}">
         <span th:text="|${session.loginInfo}님 안녕하세요|"></span>

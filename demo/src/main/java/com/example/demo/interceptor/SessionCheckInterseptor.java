@@ -16,11 +16,8 @@ public class SessionCheckInterseptor implements  HandlerInterceptor {
 
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 	HttpSession session = request.getSession(true);
-
-	session.setMaxInactiveInterval(60);
+	session.setMaxInactiveInterval(60*30);
 	
-	System.out.println(new Date(session.getMaxInactiveInterval()));
-
 	SecurityContext ctx = SecurityContextHolder.getContext();
 	if(ctx.getAuthentication().getName().equals("anonymousUser")) {
 		session.setAttribute("loginInfo", null);

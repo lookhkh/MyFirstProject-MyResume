@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<div class="wrapper">
+	<form action="/signup" method="post">
+		<input type="text" minlength="8" placeholder="8자 이상" name="userName">
+			<input type="password" minlength="8" placeholder="8자 이상" required name="password">
+			<input type="password" minlength="8" placeholder="8자 이상" required  name="checkPassword">
+			<input type="email" required name="email">
+        <input type="hidden" name="checkTheId" value="N">	
+	</form>
+    <input disabled=true type="submit" value="register">
+    <button class="checkTheId">중복체크</button>
+</div>
+</body>
+</html>
+
+
+
+
+
+<script>
+
+	(function(){
+	const $button = document.querySelector(".checkTheId");
+    const $checkedId = document.querySelector("input[name='checkTheId']");
+    const $submitBtn = document.querySelector('input[type="submit"]');
+    const $password = document.querySelectorAll("input[type='password']");
+    const $loginform = document.querySelector('form');
+
+
+
+    $submitBtn.onclick=()=>{
+        if($password[0].value===$password[1].value){
+            $loginform.submit();
+        }
+        else{
+            console.log($password[0].value)
+            console.log($password[1].value)
+
+            alert("비밀번호가 서로 다릅니다. 비밀번호를 확인해주세요");
+            $password.forEach((a)=>{
+                a.value="";
+            });
+            $password[0].focus();
+        }
+    }
+
+
+
+    $button.onclick = ()=>{
+        const $input = document.querySelector("input[type='text']");
+
+        const xhr = new XMLHttpRequest();
+        xhr.open("get", `http://localhost:8085/signup/checkId?userName=${$input.value}`);
+        xhr.send();
+
+        xhr.onreadystatechange=()=>{
+            if(xhr.status===200&&xhr.readyState===XMLHttpRequest.DONE ){
+            
+
+            const result = xhr.responseText;
+            
+            if(result === "Y"){
+                alert("이미 사용중인 ID 입니다. 다른 ID를 사용해주세요");
+                $input.value = "";
+            }else{
+                alert("사용 가능한 ID입니다");
+                $checkedId.value="Y";
+                $input.readOnly =true;
+                $submitBtn.removeAttribute('disabled');
+            }
+        }
+        }
+    }})();
+</script>

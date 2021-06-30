@@ -1,9 +1,15 @@
 package com.example.demo.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -33,12 +39,14 @@ public class MemberManageController {
 	
 	BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 	
+	@Autowired
+	CustomUserDetailService service;
+	
 	@GetMapping("/")
 	public String index(HttpSession session) {
 		
 		SecurityContext context= SecurityContextHolder.getContext();
-
-		System.out.println(context.getAuthentication().getName());
+	
 		return "/index";
 	}
 	
@@ -54,16 +62,25 @@ public class MemberManageController {
 	  @PostMapping("/signup") 
 	  public String SignUp(@ModelAttribute MemberSignUpDTO tempmemberDto, HttpServletRequest req) {
 	  
-		  
-
+		
 	  SavedMemberDTO memberDto = new SavedMemberDTO(tempmemberDto.getUserName(),passwordEncoder.encode(tempmemberDto.getPassWord()), tempmemberDto.getEmail(), MemberAuthorization.MEMBER); 
+	  
+	  HttpSession session = req.getSession();
+	  session.setAttribute("loginInfo", memberDto.getUserName());
+	  SimpleGrantedAuthority auth = new SimpleGrantedAuthority(memberDto.getAuth().toString());
+	  List<GrantedAuthority> list = new ArrayList<>();
+	  UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(memberDto.getUserName(), memberDto.getPassWord(), list);
+	  SecurityContext ctx = SecurityContextHolder.getContext();
+	  ctx.setAuthentication(token);
+	  
+	  
 	  
 	  mapper.save(memberDto); 
 	  	  
 	  
-	  //쿠키 전달 메소드 제작 필요
 	  
-	  return "redirect:/login";
+	  
+	  return "redirect:/";
 	  
 	  }
 	 
@@ -78,10 +95,8 @@ public class MemberManageController {
 		System.out.println(checkResult);
 
 		if (checkResult == null) {
-			System.out.println("Y를 던진다");
 			return "N";
 		} else {
-			System.out.println("N을 던진다");
 			return "Y";
 		}
 	}
@@ -89,12 +104,12 @@ public class MemberManageController {
 
 
 	
-	@GetMapping
-	@RequestMapping(value="/login", method=RequestMethod.GET)
+	@GetMapping("/loginReq")
 	public String loginPageForm(HttpServletRequest request) {
 		String referrer = request.getHeader("Referer");
 	    request.getSession().setAttribute("prevPage", referrer);
-	    return "login";
+	    System.out.println("로그인 컨트롤러 실행");
+	    return "redirect:/login";
 	
 	}
 	

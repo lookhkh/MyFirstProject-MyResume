@@ -17,8 +17,7 @@ public class WebConfig implements WebMvcConfigurer{
 		registry.
 		addInterceptor(interceptor) .
 		addPathPatterns("/") 
-		.addPathPatterns("/ref/**") 
-		.addPathPatterns("/admin/*");
+		.addPathPatterns("/ref/**");
 	}
 }
 
