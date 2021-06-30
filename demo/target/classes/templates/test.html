@@ -8,31 +8,7 @@
 </head>
 <body>
     <button>click</button>
+    <a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=5093077e659d1be324b08d877cf40c4b&redirect_uri=http://localhost:8085/test/auth"
+><img src="/img/kakao_login_medium_narrow.png"></a>
 </body>
 </html>
-<script>
-
-const $click = document.querySelector('button')
-$click.addEventListener('click',function(){
-    const xhr = new XMLHttpRequest();
-    const url = "http://localhost:8085/mail/test";
-    
-    xhr.open('get',url)
-    xhr.send();
-
-    xhr.onreadystatechange=()=>{
-        if(xhr.status===200){
-            let div = document.createElement('div');
-            let body= document.body;
-            console.log(body);
-
-            let result = JSON.parse(xhr.response);
-
-            div.innerHTML = result.name+result.response.age
-            body.appendChild(div);
-	
-        }
-    }
-})
-
-</script>
