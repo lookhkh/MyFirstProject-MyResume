@@ -1,0 +1,8 @@
+-------------------------------------------------------------------------------
+Test set: com.example.demo.MemberSignUpTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.026 s <<< FAILURE! - in com.example.demo.MemberSignUpTest
+test  Time elapsed: 0.001 s  <<< ERROR!
+java.lang.NullPointerException: Cannot invoke "com.example.demo.member.domain.SavedMemberDTO.getUserName()" because "dto" is null
+	at com.example.demo.MemberSignUpTest.test(MemberSignUpTest.java:30)
+

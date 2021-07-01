@@ -1,40 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
 <mapper namespace="com.example.demo.mapper.RefBoardMapper">
+
+
+<insert id="insert">
+
+<selectKey order="BEFORE" keyProperty="bno" resultType="Long">select SEQ_BOARD.nextval from dual </selectKey>
+insert into ref_board_tbl values(#{bno},#{userName},#{relationship},#{title},#{content}, sysdate) 
+</insert>
+
+<select id="getLists" resultType="com.example.demo.member.domain.RefBoardDTO">select * from ref_board_tbl where bno>0 order by REGISTERDATE desc </select>
+
+<select id="getAList" resultType="com.example.demo.member.domain.RefBoardDTO">select * from ref_board_tbl where bno=#{bno} </select>
+
+<update id="edit">UPDATE ref_board_tbl set relationship=#{relationship}, title=#{title}, content=#{content} where bno=#{bno} </update>
+
+<delete id="remove">delete from ref_board_tbl where bno=#{bno} </delete>
+
+
+<select id="getListsWithPage" resultType="com.example.demo.member.domain.RefBoardDTO">
+
+<![CDATA[select * from (select ROWNUM rn, BNO,username, relationship, TITLE, CONTENT, REGISTERDATE from ref_board_tbl where rownum<=#{pageNum}*#{amount}]]>
+<if test="rel!=null">and RELATIONSHIP=#{rel} </if>
+) where  
+<![CDATA[rn>(#{pageNum}-1)*#{amount}]]>order by REGISTERDATE DESC 
+</select>
+
+
+<select id="getTotal" resultType="int">
+select count(*) from ref_board_tbl 
+<if test="rel!=null">where RELATIONSHIP=#{rel}</if>
+
+</select>
+
+	<insert id="insertReply">
+	<selectKey order="BEFORE" keyProperty="rno" resultType="Long">select REPLY_RNO.nextval from dual </selectKey>
 	
-	<insert id="insert">
-	
-		<selectKey resultType="Long" keyProperty="bno" order="BEFORE" >
-			select SEQ_BOARD.nextval from dual
-		</selectKey>
+		insert into reply(bno,rno, writer, content, register<if test="root!=null">, rootreply</if>) values(#{bno},#{rno}, #{writer}, #{content}, sysdate<if test="root!=null">, #{root}</if>)
+		</insert>
 		
-		insert into ref_board_tbl values(#{bno},#{userName},#{relationship},#{title},#{content}, sysdate)
+		<insert id="insertReplyWithRoot">
+				<selectKey order="BEFORE" keyProperty="rno" resultType="Long">select REPLY_RNO.nextval from dual </selectKey>
+				insert into reply(bno,rno, writer, content, register, rootreply) values(#{bno},#{rno}, #{writer}, #{content}, sysdate, #{root})
+		</insert>
 		
-	</insert>
-	
-	<select id="getLists" resultType="com.example.demo.member.domain.RefBoardDTO">
-		select * from ref_board_tbl where bno>0 order by REGISTERDATE desc
-	</select>
-	
-	<select id="getAList" resultType="com.example.demo.member.domain.RefBoardDTO">
-		select * from ref_board_tbl where bno=#{bno}
-	</select>
+		<select id="getReply" resultType="com.example.demo.member.domain.RefBoardReply">
+			select * from reply where bno=#{bno}
+		</select>
+		
+		<select id="getaReply" resultType="com.example.demo.member.domain.RefBoardReply">
+			select * from reply where rno = #{rno}	
+		</select>
 
-	<update id="edit">
-		UPDATE ref_board_tbl set relationship=#{relationship}, title=#{title}, content=#{content} where bno=#{bno}
-	</update>
-	
-	<delete id="remove">
-		delete from ref_board_tbl where bno=#{bno} 
-	</delete>
 
-	<select id="getListsWithPage" resultType="com.example.demo.member.domain.RefBoardDTO">
-		<![CDATA[select * from (select ROWNUM rn, BNO,username, relationship, TITLE, CONTENT, REGISTERDATE from ref_board_tbl where rownum<=#{pageNum}*#{amount}	]]><if test="rel!=null">and RELATIONSHIP=#{rel} </if>) where <![CDATA[rn>(#{pageNum}-1)*#{amount}]]> order by REGISTERDATE DESC 
-	
-	</select>
-	
-	<select id="getTotal" resultType="int">
-		select count(*) from ref_board_tbl <if test="rel!=null">where RELATIONSHIP=#{rel}</if>
-	</select>
-
- </mapper>
+</mapper>

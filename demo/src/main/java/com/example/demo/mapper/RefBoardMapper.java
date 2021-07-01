@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.context.annotation.Primary;
 
 import com.example.demo.member.domain.RefBoardDTO;
+import com.example.demo.member.domain.RefBoardReply;
 import com.example.demo.member.repository.RefBoardRepository;
 import com.example.demo.util.PagingCriteria;
 
@@ -26,6 +27,14 @@ public interface RefBoardMapper extends RefBoardRepository {
 	
 	
 	public int getTotal(PagingCriteria cri);
+	
+	public int insertReply(RefBoardReply vo);
+
+	public List<RefBoardReply> getReply(Long bno);
+	
+	public RefBoardReply getaReply(Long rno);
+
+	public int insertReplyWithRoot(RefBoardReply vo);
 
 
 }

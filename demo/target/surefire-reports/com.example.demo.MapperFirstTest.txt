@@ -1,0 +1,28 @@
+-------------------------------------------------------------------------------
+Test set: com.example.demo.MapperFirstTest
+-------------------------------------------------------------------------------
+Tests run: 7, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.172 s <<< FAILURE! - in com.example.demo.MapperFirstTest
+mybatisSaveTest  Time elapsed: 0.064 s  <<< ERROR!
+org.springframework.dao.DuplicateKeyException: 
+
+### Error updating database.  Cause: java.sql.SQLIntegrityConstraintViolationException: ORA-00001: unique constraint (BOOK_EX.MEMBER_MANAGEMENT_TBL_PK) violated
+
+### The error may exist in file [C:\Users\jomin\myresume\demo\target\classes\mybatis\mapper\MemberMapper.xml]
+### The error may involve defaultParameterMap
+### The error occurred while setting parameters
+### SQL: insert into member_management_tbl values (?,?, ?, ?)
+### Cause: java.sql.SQLIntegrityConstraintViolationException: ORA-00001: unique constraint (BOOK_EX.MEMBER_MANAGEMENT_TBL_PK) violated
+
+; ORA-00001: unique constraint (BOOK_EX.MEMBER_MANAGEMENT_TBL_PK) violated
+; nested exception is java.sql.SQLIntegrityConstraintViolationException: ORA-00001: unique constraint (BOOK_EX.MEMBER_MANAGEMENT_TBL_PK) violated
+
+	at com.example.demo.MapperFirstTest.mybatisSaveTest(MapperFirstTest.java:89)
+Caused by: java.sql.SQLIntegrityConstraintViolationException: 
+ORA-00001: unique constraint (BOOK_EX.MEMBER_MANAGEMENT_TBL_PK) violated
+
+	at com.example.demo.MapperFirstTest.mybatisSaveTest(MapperFirstTest.java:89)
+Caused by: oracle.jdbc.OracleDatabaseException: 
+ORA-00001: unique constraint (BOOK_EX.MEMBER_MANAGEMENT_TBL_PK) violated
+
+	at com.example.demo.MapperFirstTest.mybatisSaveTest(MapperFirstTest.java:89)
+

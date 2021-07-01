@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -14,10 +16,13 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.member.domain.RefBoardDTO;
+import com.example.demo.member.domain.RefBoardReply;
 import com.example.demo.member.repository.RefBoardRepository;
 import com.example.demo.util.PageDTO;
 import com.example.demo.util.PagingCriteria;
@@ -103,7 +108,7 @@ public class RefcheckBoardController {
 		model.addAttribute("info",dto);
 		model.addAttribute("page", searchInfo);
 	
-		return "/refBoard/refDetail";
+		return "/refBoard/tempDetail";
 	}
 	
 	
@@ -135,6 +140,54 @@ public class RefcheckBoardController {
 		}
 		return "redirect:/ref";
 
+	}
+	
+	
+	////////////////////////대글 관련
+	
+	@ResponseBody
+	@PostMapping("/reply")
+	public ResponseEntity<RefBoardReply> getReply(@RequestBody RefBoardReply vo) {
+
+		System.out.println(vo.toString());
+		
+		try {
+			
+		if(vo.getRoot()==null) {
+			System.out.println("루트X");
+			mapper.insertReply(vo);
+			System.out.println(mapper.getaReply(vo.getRno()));
+
+		}else {
+			System.out.println("루트 존재");
+
+			mapper.insertReplyWithRoot(vo);
+			System.out.println(mapper.getaReply(vo.getRno()));
+
+		}
+			
+		System.out.println("저장 성공");
+		return new ResponseEntity<RefBoardReply>(vo,HttpStatus.OK);		}
+		
+		catch(Exception e){
+			System.out.println("실패");
+			e.printStackTrace();
+			return new ResponseEntity<RefBoardReply>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+
+	}
+	
+	
+	@ResponseBody
+	@GetMapping("/reply")
+	public List<RefBoardReply> getReplyList(@RequestParam("bno")Long bno){
+		System.out.println(bno+"의 댓글이 요청이 옴");
+		System.out.println(mapper.getaReply(38L).toString());
+		List<RefBoardReply>list = mapper.getReply(bno);
+		
+		list.forEach(a->System.out.println(a.toString()));
+		
+		return list;
 	}
 	
 	
